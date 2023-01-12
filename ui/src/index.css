@@ -1,0 +1,12 @@
+:root {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(176 219 235);
+  font-size: 16px;
+}
+
+div {
+  font-size: 2em;
+}
