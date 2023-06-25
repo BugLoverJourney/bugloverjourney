@@ -12,5 +12,8 @@ export default defineConfig({
       '@comp': path.resolve(__dirname, './src/components'),
       '@dto': path.resolve(__dirname, './src/api/dto'),
     },
+  },
+  server: {
+    open: true
   }
 })
