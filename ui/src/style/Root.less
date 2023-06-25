@@ -1,4 +1,4 @@
-@import './variables.less';
+@import '@/style/variables.less';
 
 header {
  background: @base-color;
@@ -28,6 +28,17 @@ nav {
   }
 }
 
+h1 {
+  margin: 1.5em 0;
+  padding-bottom: .2em;
+  border-bottom: 1px solid @base-color;
+  
+  &::before {
+    content: '';
+    padding-left: .5em;
+    margin-right: .2em;
+  }
+}
 
 .main-container {
   width: 90%;
