@@ -1,18 +1,15 @@
+import { NOTIFY_TYPES } from "../constants/basicResponse.constants";
+
 export default interface BasicResponseDTO {
   statusCode: number;
   message?: string;
   error?: string;
 }
 
-export enum NotifTypes {
-  INFO = "Info",
-  ERROR = "Error",
-  WARNING = "Warning",
-  CRITICAL = "Critical",
-}
+export type NotifyTypes = typeof NOTIFY_TYPES[keyof typeof NOTIFY_TYPES];
 
 export interface Notification {
-  type: NotifTypes;
+  type: NotifyTypes;
   shortMsg: string;
   longMsg?: string;
   id?: number;

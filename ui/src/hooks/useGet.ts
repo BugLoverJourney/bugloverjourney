@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { getApi, isNotification } from "../api/calls";
-import BasicResponseDTO from "../api/dto/basicResponse.dto";
+import { getApi, isNotification } from "@/api/calls";
+import BasicResponseDTO, { Notification } from "@/api/dto/basicResponse.dto";
 
 interface Data<T> extends BasicResponseDTO {
   data: T;
@@ -10,7 +10,8 @@ const useGet = <T, P extends Data<T>>(
   api: string,
   optionalErrorProps: Notification,
   deps: ReadonlyArray<unknown>,
-  init: T | (() => T)): [T, React.Dispatch<React.SetStateAction<T>>, boolean, AbortController | undefined] => {
+  init: T | (() => T)
+): [T, React.Dispatch<React.SetStateAction<T>>, boolean, AbortController | undefined] => {
   const [data, setData] = useState<T>(init);
   const [loading, setLoading] = useState(true);
   const controller = useRef<AbortController>();
