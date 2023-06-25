@@ -1,13 +1,15 @@
 import List, { Item } from '@comp/List';
 import useDebounce from '@hook/useDebounce';
-import { useCallback, useEffect, useState } from 'react';
+import { CSSProperties, useCallback, useEffect, useState } from 'react';
 import './ArrowList.less';
 
 interface Props {
   listItems: Item[];
+  onClick: (key: string) => void;
+  style?: CSSProperties;
 }
 
-const ArrowList = ({ listItems }: Props) => {
+const ArrowList = ({ listItems, onClick, style }: Props) => {
   const [arrowPosition, setArrowPosition] = useState(0);
   const [activeArrowPosition, setActiveArrowPosition] = useState(0);
 
@@ -28,6 +30,7 @@ const ArrowList = ({ listItems }: Props) => {
 
       itm.onClick = (e) => {
         setActiveArrowPosition(index);
+        onClick(itm.key);
         if (item.onClick)
           item.onClick(e);
       };
@@ -40,7 +43,7 @@ const ArrowList = ({ listItems }: Props) => {
   }, [listItems, arrowPosition, activeArrowPosition]);
 
   return (
-    <div className='arrow-list-container'>
+    <div className='arrow-list-container' style={style}>
       <div className='arrow' style={{ transform: `translateY(${arrowPosition * 1.2}em) rotate(45deg)` }} />
       <List items={itemsForList(listItems)} />
     </div>
