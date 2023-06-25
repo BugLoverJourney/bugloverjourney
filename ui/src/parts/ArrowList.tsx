@@ -1,48 +1,50 @@
 import List, { Item } from '@comp/List';
 import useDebounce from '@hook/useDebounce';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './ArrowList.less';
 
-const ArrowList = () => {
+interface Props {
+  listItems: Item[];
+}
+
+const ArrowList = ({ listItems }: Props) => {
   const [arrowPosition, setArrowPosition] = useState(0);
   const [activeArrowPosition, setActiveArrowPosition] = useState(0);
 
-  const handlerEnter = (position: number) => () => {
-    setArrowPosition(position)
-  };
+  const itemsForList = useCallback((items: Item[]): Item[] => {
+    return items.map((item, index) => {
+      const itm = { ...item };
+      itm.onMouseLeave = (e) => {
+        setArrowPosition(activeArrowPosition);
+        if (item.onMouseLeave)
+          item.onMouseLeave(e);
+      };
 
-  const handlerLeave = () => {
-    setArrowPosition(activeArrowPosition);
-  };
+      itm.onMouseEnter = (e) => {
+        setArrowPosition(index);
+        if (item.onMouseEnter)
+          item.onMouseEnter(e);
+      };
 
-  const handlerClick = (position: number) => () => {
-    setActiveArrowPosition(position)
-  };
+      itm.onClick = (e) => {
+        setActiveArrowPosition(index);
+        if (item.onClick)
+          item.onClick(e);
+      };
 
-  const items: Item[] = [
-    { label: "List arrow select", key: 'a' },
-    { label: "Flipping card", key: 'b' },
-    { label: "CSS Masters", key: 'c' },
-    { label: "TypeScript ENUMs", key: 'd' },
-    { label: "Redux Tutorial", key: 'e' },
-  ];
+      if (index === arrowPosition)
+        itm.className = "item-active";
 
-  items.forEach((item, index) => {
-    item.onMouseLeave = handlerLeave;
-    item.onMouseEnter = handlerEnter(index);
-    item.onClick = handlerClick(index);
-
-    if (index === arrowPosition)
-      item.className = "item-active";
-  });
+      return itm;
+    });
+  }, [listItems, arrowPosition, activeArrowPosition]);
 
   return (
     <div className='arrow-list-container'>
       <div className='arrow' style={{ transform: `translateY(${arrowPosition * 1.2}em) rotate(45deg)` }} />
-      <List items={items} />
+      <List items={itemsForList(listItems)} />
     </div>
   );
-
 };
 
 export default ArrowList;
