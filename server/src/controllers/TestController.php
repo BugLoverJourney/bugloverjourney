@@ -22,5 +22,3 @@ class TestController extends BaseController {
     parent::responseBase($data);
   }
 }
-
-?>

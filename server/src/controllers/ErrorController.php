@@ -9,5 +9,3 @@ class ErrorController extends BaseController {
     parent::responseBase();
   }
 }
-
-?>
