@@ -10,4 +10,8 @@ class ErrorHandler {
       "line" => $exception->getLine()
     ]);
   }
+
+  public static function handleError(int $number, string $msg, string $file, int $line):void {
+    throw new ErrorException($msg, 0, $number, $file, $line);
+  }
 }

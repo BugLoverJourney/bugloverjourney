@@ -20,6 +20,7 @@ function myAutoLoader (string $class) {
   require "./src/$class.php";
 }
 
+set_error_handler("ErrorHandler::handleError");
 set_exception_handler("ErrorHandler::handleException");
 
 function errorCall(int $statusCode, string $msg) {
@@ -35,8 +36,10 @@ if ($url[1] !== "api") {
   errorCall(404, "Unpredicted API call"); 
 } 
 
-if (!array_key_exists(2,$url)) {
-  errorCall(404, "Called API resource doesn`t exist!");
+switch ($url[2]) {
+  case "users":
+    (new UsersController())->response();
+    break;
+  default:
+    errorCall(404, "Called API resource doesn`t exist!");
 }
-
-(new UsersController())->response();
