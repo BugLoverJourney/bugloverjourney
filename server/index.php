@@ -44,6 +44,9 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
 
 switch ($url[2]) {
+  case  'login':
+    (new AuthController())->response();
+    break;
   case 'users':
     (new UsersController())->response();
     break;

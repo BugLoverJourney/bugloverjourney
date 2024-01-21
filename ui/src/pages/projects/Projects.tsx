@@ -8,7 +8,7 @@ import { Item } from "@comp/List";
 import './Projects.less';
 
 const Projects = () => {
-  // const [data, setData] = useGet("/api/", { type: NOTIFY_TYPES.ERROR, shortMsg: "neee neee" }, [], {});
+  const [data, setData] = useGet("/api/users", { type: NOTIFY_TYPES.ERROR, shortMsg: "neee neee" }, [], {});
   const [project, setProject] = useState<ProjectType>('list');
 
   const handleClick = (key: string) => setProject(key as ProjectType);
@@ -44,7 +44,7 @@ const PROJECT_TYPES = {
 
 type ProjectType = typeof PROJECT_TYPES[keyof typeof PROJECT_TYPES];
 
-const InProgress = () => (<div>Project in progress. Please have patience.</div>);
+const InProgress = () => (<div>Project in progress</div>);
 
 const PROJECTS = {
   [PROJECT_TYPES.table]: lazy(() => import('@/pages/projects/TableTest')),
