@@ -3,10 +3,6 @@ import '../style/Root.less';
 
 const Root = () => {
   return <>
-    <header>
-      <div className="container">
-      </div>
-    </header>
     <div className="main-wrapper">
       <Outlet />
     </div>

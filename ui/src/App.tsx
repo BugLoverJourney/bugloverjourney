@@ -4,15 +4,15 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Home from "./pages/Home";
 import Root from './pages/Root';
 import BasePage from "./pages/BasePage";
+import Menu from "./pages/Menu";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
-        <Route index path="" element={<BasePage comp={<Home />} />} />
+        <Route index path="" element={<BasePage comp={<Menu />} />} />
       </Route>
     )
   );

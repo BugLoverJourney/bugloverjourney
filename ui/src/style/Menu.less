@@ -1,0 +1,34 @@
+@import '@/style/variables.less';
+
+header {
+  .container {
+    background: @base-color;
+    text-align: center;
+  }
+}
+
+.main-menu-container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20%;
+
+    input {
+      margin-bottom: .5em;
+    }
+
+    button {
+      width: 10em;
+      height: 4em;
+    }
+  }
+
+}
